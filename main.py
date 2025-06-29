@@ -1,19 +1,26 @@
-from torch.nn import Sequential
+import torch
+import torch.nn as nn
+from torch.utils.data import TensorDataset
 
-from neocortex.data import generate_dataset
+from neocortex.create_model import create_model
 from neocortex.evaluate import evaluate
-from neocortex.model import build_model
+from neocortex.generate_dataset import generate_dataset
+from neocortex.split_dataset import split_dataset
 from neocortex.train import train
 
 
 def main() -> None:
-    x_train, y_train, x_test, y_test = generate_dataset(number_of_samples=5000)
+    torch.manual_seed(42)
 
-    model: Sequential = build_model()
+    dataset: TensorDataset = generate_dataset()
 
-    train(model, x_train, y_train)
+    train_dataset, test_dataset = split_dataset(dataset)
 
-    evaluate(model, x_test, y_test)
+    model: nn.Sequential = create_model()
+
+    train(model, train_dataset)
+
+    evaluate(model, test_dataset)
 
 
 if __name__ == "__main__":
