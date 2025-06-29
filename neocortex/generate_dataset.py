@@ -4,8 +4,8 @@ from torch.utils.data import TensorDataset
 
 
 def generate_dataset(
-    number_of_samples: int = 5000,
-    box_size: float = 100,
+    number_of_samples: int,
+    box_size: float,
 ) -> TensorDataset:
 
     half_box = box_size / 2

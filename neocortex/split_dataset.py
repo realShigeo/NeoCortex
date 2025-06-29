@@ -2,7 +2,7 @@ from torch.utils.data import TensorDataset
 
 
 def split_dataset(
-    dataset: TensorDataset, train_ratio: float = 0.8
+    dataset: TensorDataset, train_ratio: float
 ) -> tuple[TensorDataset, TensorDataset]:
 
     num_samples: int = len(dataset)

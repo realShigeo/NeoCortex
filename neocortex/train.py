@@ -3,7 +3,9 @@ from torch.utils.data import TensorDataset
 
 
 def train(
-    model: nn.Sequential, train_dataset: TensorDataset, num_epochs: int = 5000
+    model: nn.Sequential,
+    train_dataset: TensorDataset,
+    num_epochs: int,
 ) -> None:
     X_train, y_train = (  # pylint: disable=invalid-name
         train_dataset.tensors
@@ -20,5 +22,5 @@ def train(
         loss.backward()
         optimizer.step()
 
-        if epoch % 100 == 0:
+        if epoch % 1000 == 0:
             print(f"Epoch {epoch} Loss: {loss.item():.4f}")
