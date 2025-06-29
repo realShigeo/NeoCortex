@@ -1,4 +1,4 @@
-import torch.nn as nn
+from torch import nn
 
 
 def create_model(hidden_size: int = 64) -> nn.Sequential:

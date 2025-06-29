@@ -1,5 +1,5 @@
 import torch
-import torch.nn as nn
+from torch import nn
 from torch.utils.data import TensorDataset
 
 from neocortex.create_model import create_model
@@ -12,7 +12,7 @@ from neocortex.train import train
 def main() -> None:
     torch.manual_seed(42)
 
-    dataset: TensorDataset = generate_dataset()
+    dataset: TensorDataset = generate_dataset(box_size=1000)
 
     train_dataset, test_dataset = split_dataset(dataset)
 

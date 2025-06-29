@@ -1,6 +1,4 @@
-import torch.nn as nn
-import torch.optim as optim
-from torch import Tensor
+from torch import Tensor, nn, optim
 from torch.utils.data import TensorDataset
 
 
@@ -22,5 +20,5 @@ def train(
         loss.backward()
         optimizer.step()
 
-        if epoch % 10 == 0:
+        if epoch % 100 == 0:
             print(f"Epoch {epoch} Loss: {loss.item():.4f}")
