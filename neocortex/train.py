@@ -3,24 +3,22 @@ from torch.utils.data import TensorDataset
 
 
 def train(
-    model: nn.Sequential,
-    train_dataset: TensorDataset,
-    num_epochs: int,
+    model: nn.Sequential, dataset: TensorDataset, num_epochs: int
 ) -> None:
-    X_train, y_train = (  # pylint: disable=invalid-name
-        train_dataset.tensors
-    )  # shape: (num_training_samples, 4), (num_training_samples, 2)
+    X_train, y_train = dataset.tensors  # pylint: disable=invalid-name
+    X_train = X_train.unsqueeze(1)  # pylint: disable=invalid-name
+    y_train = y_train.unsqueeze(1)
 
     loss_function: nn.MSELoss = nn.MSELoss()
     optimizer: optim.Adam = optim.Adam(model.parameters(), lr=1e-3)
 
     for epoch in range(num_epochs):
-        preds: Tensor = model(X_train)  # shape: (num_training_samples, 2)
-        loss: Tensor = loss_function(preds, y_train)  # shape: ()
+        predictions: Tensor = model(X_train)
+        loss: Tensor = loss_function(predictions, y_train)
 
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
 
-        if epoch % 1000 == 0:
-            print(f"Epoch {epoch} Loss: {loss.item():.4f}")
+        if epoch % 100 == 0:
+            print(f"Epoch: {epoch}, Loss: {loss.item()}")

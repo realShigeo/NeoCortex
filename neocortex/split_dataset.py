@@ -4,25 +4,22 @@ from torch.utils.data import TensorDataset
 def split_dataset(
     dataset: TensorDataset, train_ratio: float
 ) -> tuple[TensorDataset, TensorDataset]:
-
     num_samples: int = len(dataset)
-    num_training_samples: int = int(train_ratio * num_samples)
+    num_train_samples: int = int(num_samples * train_ratio)
 
-    model_inputs, displacement_vectors = (
-        dataset.tensors
-    )  # shape: (num_samples, 4), (num_samples, 2)
+    inputs, outputs = dataset.tensors
 
     X_train, y_train = (  # pylint: disable=invalid-name
-        model_inputs[:num_training_samples],
-        displacement_vectors[:num_training_samples],
-    )  # shape: (num_training_samples, 4), (num_training_samples, 2)
+        inputs[:num_train_samples],
+        outputs[:num_train_samples],
+    )
 
     X_test, y_test = (  # pylint: disable=invalid-name
-        model_inputs[num_training_samples:],
-        displacement_vectors[num_training_samples:],
-    )  # shape: (num_test_samples, 4), (num_test_samples, 2)
+        inputs[num_train_samples:],
+        outputs[num_train_samples:],
+    )
 
-    train_dataset: TensorDataset = TensorDataset(X_train, y_train)
-    test_dataset: TensorDataset = TensorDataset(X_test, y_test)
+    training_dataset: TensorDataset = TensorDataset(X_train, y_train)
+    testing_dataset: TensorDataset = TensorDataset(X_test, y_test)
 
-    return train_dataset, test_dataset
+    return training_dataset, testing_dataset

@@ -1,12 +1,12 @@
 from torch import nn
 
 
-def create_model(hidden_size: int = 64) -> nn.Sequential:
+def create_model() -> nn.Sequential:
     model: nn.Sequential = nn.Sequential(
-        nn.Linear(4, hidden_size),
+        nn.Linear(1, 64),
         nn.ReLU(),
-        nn.Linear(hidden_size, hidden_size),
+        nn.Linear(64, 64),
         nn.ReLU(),
-        nn.Linear(hidden_size, 2),
+        nn.Linear(64, 1),
     )
     return model
