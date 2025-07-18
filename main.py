@@ -9,13 +9,14 @@ from neocortex.normalize_dataset import normalize_dataset
 from neocortex.split_dataset import split_dataset
 from neocortex.train import train
 
+# Environment Parameters
 MAX_LENGTH: float = 10.5
-NUM_SAMPLES: int = 5000
 VEHICLE_VELOCITY: float = 1.35
 
+# Training Parameters
 TRAIN_RATIO: float = 0.8
-
 NUM_EPOCHS: int = 5000
+NUM_SAMPLES: int = 5000
 
 
 def main() -> None:
