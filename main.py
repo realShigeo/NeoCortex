@@ -10,8 +10,8 @@ from neocortex.split_dataset import split_dataset
 from neocortex.train import train
 
 # Environment Parameters
-MAX_LENGTH: float = 10.5
-VEHICLE_VELOCITY: float = 1.35
+MAX_LENGTH: float = 10.5  # m
+VEHICLE_VELOCITY: float = 1.35  # m/s
 
 # Training Parameters
 TRAIN_RATIO: float = 0.8
